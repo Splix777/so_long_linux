@@ -18,6 +18,7 @@ typedef struct s_game
     void    *img_exit;
     void    *img_collectible;
     char    **map;
+    int     valid_path;
     int     map_width;
     int     map_height;
     int     img_width;
@@ -43,25 +44,33 @@ typedef struct s_game
 
 # define KEY_ESC 65307
 # define KEY_Q 113
-// Map Checkers
-int     valid_argv(char *file);
+// Valid ARGV
+int valid_argv(char *file);
+// Valid Map
 int     valid_map(t_game *game);
+int     is_rectangle(t_game *game);
 int     has_walls(t_game *game);
 int     has_pec(t_game *game);
-int     is_rectangle(t_game *game);
 int     correct_format(t_game *game);
-// Map Loaders and Handlers
+// Valid Path
+char     **dup_map(t_game *game);
+int     check_surrounding(char **map, int y, int x);
+void    flood_fill(t_game *game, char **map, int y, int x);
+int     has_valid_path(t_game *game);
+// Utils
+void    free_arr(char **arr);
 char    **load_map(char *file);
+void    display_moves(t_game *game);
+// Gameplay
+void     key_press(int keycode, t_game *game);
+int     keystroke(int keycode, t_game *game);
+void    play_game(t_game *game);
+// Graphical
 void    load_graphics(t_game *game);
 void    open_window(t_game *game);
+int     draw_map(t_game *game);
 void    load_game(t_game *game);
-void    free_arr(char **map);
-void    display_moves(t_game *game);
-int close_window(t_game *game);
-int draw_map(t_game *game);
-// Gameplay
-void    play_game(t_game *game);
-int key_press(int keycode, t_game *game);
+int     close_window(t_game *game);
 // Movements
 void    update_position(t_game *game, char keystroke);
 void    move_up(t_game *game);

@@ -7,9 +7,8 @@ int main(int argc, char **argv)
     if (argc == 2)
     {
         game.map = load_map(argv[1]);
-        if (valid_argv(argv[1]) && valid_map(&game))
+        if (valid_argv(argv[1]) && valid_map(&game) && has_valid_path(&game))
         {
-            ft_printf("Map is Valid!\n");
             load_game(&game);
             play_game(&game);
             mlx_loop(game.mlx);
@@ -18,10 +17,7 @@ int main(int argc, char **argv)
         {
             ft_printf("Error: Invalid Map Format!\n");
             if (game.map)
-            {
-                ft_printf("Freeing Map...\n");
                 free_arr(game.map);
-            }
             return (0);
         }
     }

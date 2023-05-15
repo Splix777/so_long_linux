@@ -4,13 +4,21 @@ void    update_position(t_game *game, char keystroke)
 {
     mlx_destroy_image(game->mlx, game->img_player);
     if (keystroke == 'a')
-        game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player_left.xpm", &game->img_width, &game->img_height);
+        game->img_player = mlx_xpm_file_to_image
+            (game->mlx, "textures/player_left.xpm",
+            &game->img_width, &game->img_height);
     else if (keystroke == 'd')
-        game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player_right.xpm", &game->img_width, &game->img_height);
+        game->img_player = mlx_xpm_file_to_image
+            (game->mlx, "textures/player_right.xpm",
+            &game->img_width, &game->img_height);
     else if (keystroke == 'w')
-        game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player_up.xpm", &game->img_width, &game->img_height);   
+        game->img_player = mlx_xpm_file_to_image
+            (game->mlx, "textures/player_up.xpm",
+            &game->img_width, &game->img_height);
     else if (keystroke == 's')
-        game->img_player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm", &game->img_width, &game->img_height); 
+        game->img_player = mlx_xpm_file_to_image
+            (game->mlx, "textures/player.xpm",
+            &game->img_width, &game->img_height);
 }
 
 void    move_up(t_game *game)

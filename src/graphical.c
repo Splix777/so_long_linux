@@ -1,30 +1,5 @@
 #include "so_long.h"
 
-char    **load_map(char *file)
-{
-    int     fd;
-    char    *line;
-    char    *tmp;
-    char    **map;
-
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
-        return (NULL);
-    tmp = NULL;
-    while (1)
-    {
-        line = get_next_line(fd);
-        if (line == NULL)
-            break ;
-        tmp = gnl_strjoin(tmp, line);
-        free(line);
-    }
-    map = ft_split(tmp, '\n');
-    free(tmp);
-    close(fd);
-    return (map);
-}
-
 void    load_graphics(t_game *game)
 {
     game->img_background = mlx_xpm_file_to_image
@@ -80,43 +55,16 @@ int    draw_map(t_game *game)
     return (0);
 }
 
-void    display_moves(t_game *game)
-{
-    char *moves;
-
-    moves = ft_itoa(game->moves);
-    mlx_string_put(game->mlx, game->win, 10, 10, 0x00FFFFFF, "Moves: ");
-    mlx_string_put(game->mlx, game->win, 70, 10, 0x00FFFFFF, moves);
-    free(moves);
-}
-
 void    load_game(t_game *game)
 {
     game->mlx = mlx_init();
-    ft_printf("MLX Initialized!\n");
     open_window(game);
-    ft_printf("Window Opened!\n");
-    game->win = mlx_new_window(game->mlx, game->img_width, game->img_height, "Not Pac-Man");
-    ft_printf("Window Created!\n");
+    game->win = mlx_new_window
+        (game->mlx, game->img_width, game->img_height, "Not Pac-Man");
     game->moves = 0;
     game->winner = 0;
     load_graphics(game);
-    ft_printf("Graphics Loaded!\n");
     draw_map(game);
-    ft_printf("Map Drawn!\n");
-}
-
-void    free_arr(char **map)
-{
-    int i;
-
-    i = 0;
-    while (map[i] != NULL)
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
 }
 
 int    close_window(t_game *game)

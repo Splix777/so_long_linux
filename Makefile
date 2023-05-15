@@ -7,11 +7,14 @@ MLXFLAGS = -L. -lXext -L. -lX11
 
 RM = rm -f
 
-SRC =	src/checkers.c \
-		src/gameplay.c \
-		src/handlers.c \
-		src/so_long.c \
-		src/movements.c \
+SRC =	src/gameplay.c		\
+		src/graphical.c		\
+		src/movements.c		\
+		src/so_long.c		\
+		src/utils.c			\
+		src/valid_argv.c	\
+		src/valid_map.c		\
+		src/valid_path.c	\
 
 OBJ = $(SRC:.c=.o)
 
